@@ -1,9 +1,5 @@
 import 'dart:math';
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 enum DropCapMode {
   /// default
@@ -30,9 +26,7 @@ class DropCap extends StatelessWidget {
     required this.child,
     required this.width,
     required this.height,
-  })   : assert(width != null),
-        assert(height != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,16 +65,15 @@ class DropCapText extends StatelessWidget {
       this.overflow = TextOverflow.clip,
       this.maxLines,
       this.dropCapPosition})
-      : assert(data != null),
-        super(key: key);
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     TextStyle textStyle = TextStyle(
-      color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.black,
+      color: Theme.of(context).textTheme.bodyLarge?.color ?? Colors.black,
       fontSize: 14,
       height: 1,
-      fontFamily: Theme.of(context).textTheme.bodyText1?.fontFamily,
+      fontFamily: Theme.of(context).textTheme.bodyLarge?.fontFamily,
     ).merge(style);
 
     if (data == '') return Text(data, style: textStyle);
@@ -133,7 +126,7 @@ class DropCapText extends StatelessWidget {
     TextSpan textSpan = TextSpan(
       text: parseInlineMarkdown ? null : restData,
       children: parseInlineMarkdown ? mdRest!.toTextSpanList() : null,
-      style: textStyle.apply(fontSizeFactor: MediaQuery.of(context).textScaleFactor),
+      style: textStyle.apply(fontSizeFactor: MediaQuery.of(context).textScaler.scale(textStyle.fontSize ?? 14)),
     );
 
     TextPainter textPainter = TextPainter(textDirection: textDirection, text: textSpan, textAlign: textAlign);
