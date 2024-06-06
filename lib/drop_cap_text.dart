@@ -126,7 +126,8 @@ class DropCapText extends StatelessWidget {
     TextSpan textSpan = TextSpan(
       text: parseInlineMarkdown ? null : restData,
       children: parseInlineMarkdown ? mdRest!.toTextSpanList() : null,
-      style: textStyle.apply(fontSizeFactor: MediaQuery.textScalerOf(context).scale(textStyle.fontSize ?? 1)),
+      style: textStyle.apply(
+          fontSizeFactor: MediaQuery.textScalerOf(context).scale(textStyle.fontSize ?? 1) / (textStyle.fontSize ?? 1)),
     );
 
     TextPainter textPainter = TextPainter(textDirection: textDirection, text: textSpan, textAlign: textAlign);
